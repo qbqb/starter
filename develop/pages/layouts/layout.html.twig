@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>
+          {% block title %}Site Page{% endblock %}
+        </title>
+        <link rel="stylesheet" href="/assets/css/product/normalize.css">
+        <link rel="stylesheet" href="/assets/css/product/styles.css">
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="layout">
+            <header id="header" class="header"></header>
+            <section id="content" class="content">
+                {% block content %}
+
+
+
+
+                    {# Your content #}
+
+
+
+
+                {% endblock %}
+            </section>
+            <footer id="footer" class="footer"></footer>
+        </div>
+        <script src="/assets/js/jquery-1.10.2.min.js"></script>
+        <script src="/assets/js/scripts.js"></script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,15 @@
+
+
+
+// Generate the medium columns
+.make-md-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  (@gutter / 2);
+  padding-right: (@gutter / 2);
+}
+.make-md-column-offset(@columns) {
+     margin-left: percentage((@columns / @grid-columns));
+}
+
+
