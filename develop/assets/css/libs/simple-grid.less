@@ -1,15 +1,43 @@
+@grid-row-width: 960px;
+@grid-cols: 12;
+@grid-gutter:30px;
 
 
-
-// Generate the medium columns
-.make-md-column(@columns; @gutter: @grid-gutter-width) {
-  position: relative;
-  min-height: 1px;
-  padding-left:  (@gutter / 2);
-  padding-right: (@gutter / 2);
-}
-.make-md-column-offset(@columns) {
-     margin-left: percentage((@columns / @grid-columns));
+.grid-row {
+    position: relative;
+    margin:auto;
+    width: @grid-row-width;
+    .clearfix();
 }
 
+.grid-col(@n:1; @padding-left:@grid-gutter/2; @padding-right:@grid-gutter/2 ) {
+    float: left;
+    width: @n*(@grid-row-width/@grid-cols) ;
+    padding-left: @padding-left;
+    padding-right: @padding-right;
+    min-height: 1px;
+}
+
+.grid-col-offset(@n:1){
+    margin-left: @n*(@grid-row-width/@grid-cols);
+}
+
+
+/**** Example ******
+
+.main-row {
+    .grid-row;
+}
+
+.main-col {
+    .grid-col(3);
+    outline: 1px solid #000;
+    min-height: 100px;
+}
+
+.main-col2 {
+    .grid-col-offset(3);
+}
+
+*/
 

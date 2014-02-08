@@ -7,9 +7,10 @@ module.exports = function(grunt) {
           //compress: true,
           //yuicompress: true,
           //optimization: 2
-          sourceMap: true,
-          sourceMapURL: 'styles.css.map',
-          sourceMapFilename: 'develop/assets/css/product/styles.css.map',
+
+          // sourceMap: true,
+          // sourceMapURL: 'styles.css.map',
+          // sourceMapFilename: 'develop/assets/css/product/styles.css.map',
 
         },
         files: {
