@@ -1,4 +1,34 @@
 @charset "utf-8";
+.grid-row {
+  position: relative;
+  margin: auto;
+  width: 960px;
+}
+.grid-row:before,
+.grid-row:after {
+  content: " ";
+  display: table;
+}
+.grid-row:after {
+  clear: both;
+}
+/**** Example *****
+
+.main-row {
+    .grid-row;
+}
+
+.main-col {
+    .grid-col(3);
+    outline: 1px solid #000;
+    min-height: 100px;
+}
+
+.main-col2 {
+    .grid-col-offset(3);
+}
+
+*/
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -17,7 +47,7 @@ html {
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
-  line-height: 1.42857143;
+  line-height: 1.428571429;
   color: #000000;
   background-color: #ffffff;
 }
@@ -263,7 +293,7 @@ dl {
 }
 dt,
 dd {
-  line-height: 1.42857143;
+  line-height: 1.428571429;
 }
 dt {
   font-weight: bold;
@@ -296,7 +326,7 @@ blockquote small,
 blockquote .small {
   display: block;
   font-size: 80%;
-  line-height: 1.42857143;
+  line-height: 1.428571429;
   color: #ccc;
 }
 blockquote footer:before,
@@ -335,9 +365,8 @@ blockquote:after {
 address {
   margin-bottom: 20px;
   font-style: normal;
-  line-height: 1.42857143;
+  line-height: 1.428571429;
 }
 .layout {
   /*  min-width: 980px;*/
 }
-/*# sourceMappingURL=styles.css.map */
