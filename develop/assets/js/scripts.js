@@ -1,12 +1,16 @@
 (function() {
 
-    var site = {
+    var SITE = SITE || {
 
         parentElement: 'body',
 
         init: function(){
 
-            site.util.stretchContent({offset:0});
+            if(SITE.util.stretchContent){
+               SITE.util.stretchContent({offset:0}); //растягивает контент
+            } else {
+                throw new Error('SITE.util.stretchContent not found');
+            }
 
         },
 
@@ -70,37 +74,16 @@
                 }
 
 
-            },
-
-            clickBlock: function(params){
-
-                var o = $.extend({
-                    parentEl: $(this.parentElement),
-                    el: '.clickBlockEl',
-                    textIn: 'some text'
-                },params);
-
-                o.parentEl.find(o.el).click(function(){
-                    console.log(o.textIn);
-                });
-
-                // o.parentEl.delegate(o.el, 'click', function(event) {
-                //     console.log(o.textIn);
-                // });
-
-
             }
-
-
 
         }
 
     };
-    site.init();
+    SITE.init();
 
 
 
-    site.main = {
+    SITE.main = {
 
         parentElement: '#main',
 
@@ -108,21 +91,10 @@
 
             var $p = $(this.parentElement);
 
-            $p.html("<div class='bb'>hello page</div>");
-
-            site.util.clickBlock({
-                parentEl:$p,
-                el: '.bb',
-                textIn: 'another anotherrrrr'
-            });
-
-            // site.util.clickBlock();
-
-        },
-        util: {}
+        }
 
     }
-    site.main.init();
+    SITE.main.init();
 
 
 
@@ -137,14 +109,22 @@
 
     //.....
 
-    site.page = {
-        parentElement: '#page',
-        init: function(){
-            var $p = $(this.parentElement); // $('#page')
-        },
-        util: {}
-    }
-    site.page.init();
+    // site.page = {
+    //     parentElement: '#page',
+    //     init: function(){
+    //         var $p = $(this.parentElement); // $('#page')
+    //              if(SITE.util.stretchContent){
+
+    //                 SITE.util.stretchContent({offset:0});
+
+    //              } else {
+
+    //                  throw new Error('SITE.util.stretchContent not found');
+    //              }
+    //     },
+    //     util: {}
+    // }
+    // site.page.init();
 
 
 }).call(this);
