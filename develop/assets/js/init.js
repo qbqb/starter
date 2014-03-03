@@ -1,6 +1,4 @@
 $.Placeholder.init({ color : '#ccc' });
+//$('body').stretch();
 
-$(function(){
-    //$('body').stretch();
-});
 
