@@ -140,6 +140,100 @@ ol.list{list-style-type:decimal;}
 
 }
 
+
+
+.g-cols {
+    .clearfix();
+    width: 100%;
+    position: relative;
+}
+.g-col {
+    display: block;
+    float: left;
+    min-height: 1px;
+    position: relative;
+}
+.g-col1_2 {
+    .g-col;
+    width: 50%;
+}
+.g-col1_3 {
+    .g-col;
+    width: 33.33%;
+}
+.g-col1_4 {
+    .g-col;
+    width: 25%;
+}
+.g-col1_5 {
+    .g-col;
+    width: 20%;
+}
+
+
+
+
+
+/*
+
+<ul class="g-cols">
+    <li class="g-col1_3">12</li>
+    <li class="g-col1_3">34</li>
+    <li class="g-col1_3">56</li>
+</ul>
+
+*/
+
+
+
+.g-jcols {
+   width: 100%;
+   text-align: justify;
+   font-size: 0; font-size: 12px\9;
+   &:after {
+        content: ""; width: 100%; display: inline-block; zoom: 1; *display: inline;
+   }
+}
+
+.g-jcol {
+    position: relative;
+    display: inline-block; *zoom: 1; *display: inline;
+    font-size: @font-size;
+}
+
+
+/*
+
+<ul class="g-jcols">
+    <li class="g-jcol">12</li>
+    <li class="g-jcol">34</li>
+    <li class="g-jcol">56</li>
+</ul>
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // =============================================
 // Custom Elements
 // =============================================
@@ -295,4 +389,8 @@ ol.list{list-style-type:decimal;}
 .main {
 
 }
+
+
+
+
 
