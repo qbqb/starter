@@ -1,4 +1,3 @@
-
 // (function($){
 //     $.fn.stretch = function ( options ) {
 //         var o = $.extend({
@@ -8,19 +7,17 @@
 //             offset   :  0
 //         }, options);
 //         return this.each(function(event){
-//             var windowHeight   =  $(window).outerHeight(true),
-//                 headerHeight   =  o.header.outerHeight(true),
+//             var headerHeight   =  o.header.outerHeight(true),
 //                 footerHeight   =  o.footer.outerHeight(true);
-
 //             function init(){
-//                o.content.css('minHeight', o.windowHeight - o.footerHeight - o.headerHeight + o.offset);
+//                o.content.css('minHeight', $(window).outerHeight(true) - footerHeight - headerHeight + o.offset);
+
 //             }
-//             $(document).ready(init);
+//             init();
 //             $(window).resize(init);
 //         });
 //     }
 // })(jQuery);
-
 
 
 
