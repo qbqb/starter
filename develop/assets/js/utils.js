@@ -1,123 +1,149 @@
-// (function($){
-//     $.fn.stretch = function ( options ) {
-//         var o = $.extend({
-//             header   :  $('#header'),
-//             content  :  $('#content'),
-//             footer   :  $('#footer'),
-//             offset   :  0
-//         }, options);
-//         return this.each(function(event){
-//             var headerHeight   =  o.header.outerHeight(true),
-//                 footerHeight   =  o.footer.outerHeight(true);
-//             function init(){
-//                o.content.css('minHeight', $(window).outerHeight(true) - footerHeight - headerHeight + o.offset);
-
-//             }
-//             init();
-//             $(window).resize(init);
-//         });
-//     }
-// })(jQuery);
-
-
-
-// (function($){
-
-//     $.fn.createSwiper = function ( parameters, options ) {
-
-//         var params = $.extend({
-//             speed: 500,
-//             loop: true,
-//             generatePagination: true,
-//             pagination: '.swiper-pagination',
-//             grabCursor: true,
-//             autoplay: 3000,
-//             noSwiping: false,
-//             noSwipingClass: 'stop-swiping',
-//             preventLinks: true,
-//             mousewheelControl: false,
-//             keyboardControl: false,
-//         }, parameters);
-
-//         var o = $.extend({
-//             pagination:'.swiper-pagination',
-//             prev: '.swiper-prev',
-//             next: '.swiper-next'
-//         }, options);
-
-//         return this.each(function(){
-//             var swiper = $(this).find('.swiper-container').swiper( $.extend({}, params));
-
-//             $(o.prev).click(function(){
-//                swiper.swipePrev();
-//             });
-//             $(o.next).click(function(){
-//                swiper.swipeNext();
-//             });
-//             $(o.pagination+' .swiper-pagination-switch').click(function(){
-//                swiper.swipeTo($(this).index());
-//             });
-//             $(' '+o.pagination+', '+o.prev+', '+o.next ).hover(
-//                function(){
-//                 swiper.stopAutoplay();
-//             }, function(){
-//                 swiper.startAutoplay();
-//             });
-
-//             $(this).find('.swiper-container').hover(
-//                function(){
-//                 swiper.stopAutoplay();
-//             }, function(){
-//                 swiper.startAutoplay();
-//             });
-//         });
-//     }
-
-// })(jQuery);
+(function($){
+    $.fn.stretch = function ( options ) {
+        var o = $.extend({
+            header   :  $('#header'),
+            content  :  $('#content'),
+            footer   :  $('#footer'),
+            offset   :  0
+        }, options);
+        return this.each(function(event){
+            var headerHeight   =  o.header.outerHeight(),
+                footerHeight   =  o.footer.outerHeight();
+            function init(){
+               o.content.css('minHeight', $(window).outerHeight() - footerHeight - headerHeight + o.offset);
+            }
+            init();
+            $(window).resize(init);
+        });
+    }
+})(jQuery);
 
 
 
+(function($){
+    $.fn.createSwiper = function ( parameters, options ) {
+        var params = $.extend({
+            speed: 500,
+            loop: true,
+            generatePagination: false,
+            grabCursor: true,
+            // autoplay: 3000,
+            preventLinks: true,
+            noSwiping: false,
+            noSwipingClass:'stop-swiping',
+            mousewheelControl: false,
+            keyboardControl: false
+        }, parameters);
 
-// (function($){
+        var o = $.extend({
+            pagination:'.swiper-pagination',
+            prev: '.swiper-prev',
+            next: '.swiper-next',
+            paginationSpeed: params.speed
+        }, options);
 
-//   $.fn.dropdown = function(opts){
+        return this.each(function(){
 
-//     var opts = $.extend({
-//       el: '.dropdown',
-//       button: '.dropdown-button',
-//       menu: '.dropdown-menu',
-//       title: '.dropdown-button-title',
-//       itemTitle: '.dropdown-menu-title'
-//     },opts);
+            var $el = $(this);
 
-//     return this.each(function(){
+            var swiper = $el.find('.swiper-container').swiper( $.extend({
+                onSlideChangeStart: function(activeIndex){
+                    $el.find('.swiper-pagination-switch').removeClass('swiper-active-switch');
+                    $el.find('.swiper-pagination-switch').eq(swiper.activeLoopIndex).addClass('swiper-active-switch');
+                }
+            }, params));
 
-//         var $button = $(this).find(opts.button),
-//             $item = $(this).find('li');
+            //Prev, Next
+            $el.find(o.prev).click(function(){
+               swiper.swipePrev();
+            });
+            $el.find(o.next).click(function(){
+               swiper.swipeNext();
+            });
 
-//         $button.click(function(event){
-//             var $menu = $(this).parent().find(opts.menu);
-//             if ($menu.hasClass('active')) {
-//                  $menu.css('display','none').removeClass('active');
-//                 $('body').off('click',hideDropdown);
-//             } else {
-//                 $menu.css('display','block').addClass('active');
-//                 $('body').on('click',hideDropdown);
-//             }
-//         });
+            //Generate Pagination
+            var i, slidesLength = swiper.slides.length-2;
+            for(i=0;i<slidesLength;i++){
+                $el.find(o.pagination).append("<span class='swiper-pagination-switch'></span>")
+            }
+            $el.find(o.pagination).children().eq(0).addClass('swiper-active-switch')
+            $el.delegate('.swiper-pagination-switch', 'click', function() {
+                swiper.swipeTo($(this).index(), o.paginationSpeed);
+                $el.find('.swiper-pagination-switch').removeClass('swiper-active-switch');
+                $(this).addClass('swiper-active-switch');
+            });
 
-//         $item.click(function(){
-//             $(this).closest(opts.menu).css('display','none').removeClass('active');
-//             $(this).closest(opts.menu).parent().find(opts.title).html( $(this).find(opts.itemTitle).html() );
-//             $(this).closest(opts.el).find('input:hidden').val( $(this).data('value') );
-//         });
+            //Hovers
+            $(' '+o.pagination+', '+o.prev+', '+o.next ).hover(
+               function(){
+                swiper.stopAutoplay();
+            }, function(){
+                swiper.startAutoplay();
+            });
+            $(this).find('.swiper-container').hover(
+               function(){
+                swiper.stopAutoplay();
+            }, function(){
+                swiper.startAutoplay();
+            });
 
-//         function hideDropdown(e){
-//             if( $(e.target).is(opts.el) || $(e.target).is(opts.el+' *')) return;
-//             $(opts.menu).css('display','none').removeClass('active');
-//             $('body').off('click',hideDropdown);
-//         }
+        });
+    }
+})(jQuery);
 
-//     });
-//   };
-// })(jQuery);
+
+
+
+
+(function($){
+
+  $.fn.dropdown = function(opts){
+
+    var opts = $.extend({
+      el: '.dropdown',
+      button: '.dropdown-button',
+      menu: '.dropdown-menu',
+      title: '.dropdown-button-title',
+      item: '.dropdown-menu-item',
+      itemTitle: '.dropdown-menu-title'
+
+    },opts);
+
+    return this.each(function(){
+
+        var $el = $(this),
+            $button = $(this).find(opts.button),
+            $item = $(this).find(opts.item);
+
+        $button.click(function(event){
+            var $menu = $(this).parent().find(opts.menu);
+            if ($menu.hasClass('active')) {
+                $el.removeClass('active');
+                $menu.css('display','none').removeClass('active');
+                $('body').off('click',hideDropdown);
+            } else {
+                $(opts.el).removeClass('active');
+                $(opts.el).find(opts.menu).css('display','none').removeClass('active');
+                $el.addClass('active');
+                $menu.css('display','block').addClass('active');
+                $('body').on('click',hideDropdown);
+            }
+        });
+
+        $item.click(function(){
+            $(this).closest(opts.menu).css('display','none').removeClass('active');
+            $(this).closest(opts.menu).parent().find(opts.title).html( $(this).find(opts.itemTitle).html() );
+            $(this).closest(opts.el).find('input:hidden').val( $(this).data('value') );
+            $el.removeClass('active');
+        });
+
+        function hideDropdown(e){
+            if( $(e.target).is(opts.el) || $(e.target).is(opts.el+' *')) return;
+            $(opts.menu).css('display','none').removeClass('active');
+            $('body').off('click',hideDropdown);
+            $el.removeClass('active');
+        }
+
+    });
+  };
+})(jQuery);

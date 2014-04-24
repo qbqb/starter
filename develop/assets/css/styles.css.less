@@ -1,19 +1,7 @@
 @charset "utf-8";
-@import "libs/normalize.less";
-@import "libs/variables.less";
 @import "libs/mixins.less";
-
-* {
-  -moz-box-sizing: padding-box;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-*:before,
-*:after {
- -moz-box-sizing: padding-box;
- box-sizing: border-box;
- -webkit-box-sizing: border-box;
-}
+@import "libs/variables.less";
+@import "libs/normalize.less";
 
 html {
    min-width: 960px;
@@ -27,6 +15,41 @@ body {
   background-color: @body-bg;
 }
 
+a {
+  color: @link-color;
+  text-decoration: underline;
+  &:hover,
+  &:focus {
+    color: @link-hover-color;
+    text-decoration: none;
+  }
+
+}
+
+.img-responsive {
+  .img-responsive();
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: @font-family-h;
+  line-height: @line-height-h;
+  color: @color-h;
+  font-weight: @font-weight-h;
+  margin: 0;
+  padding: 0;
+}
+h1 { font-size: @font-size-h1; }
+h2 { font-size: @font-size-h2; }
+h3 { font-size: @font-size-h3; }
+h4 { font-size: @font-size-h4; }
+h5 { font-size: @font-size-h5; }
+h6 { font-size: @font-size-h6; }
+
+p {
+   margin: 0;
+   padding: 0;
+}
+
 input,
 button,
 select,
@@ -36,111 +59,10 @@ textarea {
   line-height: @line-height;
 }
 
-a {
-  color: @link-color;
-  text-decoration: none;
-
-  &:hover,
-  &:focus {
-    color: @link-hover-color;
-    text-decoration: underline;
-  }
-
-}
-
-// Images
-img {
-  vertical-align: middle;
-}
-
-// Responsive images (ensure images don't scale beyond their parents)
-.img-responsive {
-  .img-responsive();
-}
-
-
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: @font-family-h;
-  line-height: @line-height-h;
-  color: @color-h;
-  font-weight: @font-weight-h;
-  margin: 0;
-}
-h1, .h1 { font-size: @font-size-h1; }
-h2, .h2 { font-size: @font-size-h2; }
-h3, .h3 { font-size: @font-size-h3; }
-h4, .h4 { font-size: @font-size-h4; }
-h5, .h5 { font-size: @font-size-h5; }
-h6, .h6 { font-size: @font-size-h6; }
-
-p {
-  margin: 0 0 (@line-height-computed / 2);
-}
-
 .none{display:none;}
 ul.list{list-style-type:disc;}
 ol.list{list-style-type:decimal;}
 .fix {.clearfix()}
-
-
-@grid-row-width: 960px;
-@grid-cols: 12;
-@grid-gutter:30px;
-
-.grid-row {
-    position: relative;
-    margin:auto;
-    width: @grid-row-width;
-    .clearfix();
-}
-
-.grid-col(@n:1; @padding-left:@grid-gutter/2; @padding-right:@grid-gutter/2 ) {
-    float: left;
-    width: @n*(@grid-row-width/@grid-cols) ;
-    padding-left: @padding-left;
-    padding-right: @padding-right;
-    min-height: 1px;
-}
-
-.grid-col-offset(@n:1){
-    margin-left: @n*(@grid-row-width/@grid-cols);
-}
-
-/**** Example *****
-
-.main-row {
-    .grid-row;
-}
-
-.main-col {
-    .grid-col(3); //4 колонки
-}
-
-.main-col2 {
-    .grid-col-offset(3);
-}
-
-*/
-
-
-
-.ico {
-  display: inline-block; *zoom: 1; *display: inline;
-  position: relative;
-  background: url("/assets/images/sprite.png") no-repeat;
-
-  &.ico-site {
-    .wh(10px,10px);
-    .bp(0px,0px);
-    top: 0;
-    left: 0;
-  }
-
-}
-
-
 
 .g-cols {
     .clearfix();
@@ -169,21 +91,10 @@ ol.list{list-style-type:decimal;}
     .g-col;
     width: 20%;
 }
-
-
-
-
-
-/*
-
-<ul class="g-cols">
-    <li class="g-col1_3">12</li>
-    <li class="g-col1_3">34</li>
-    <li class="g-col1_3">56</li>
-</ul>
-
-*/
-
+// <ul class="g-cols">
+//     <li class="g-col1_2">12</li>
+//     <li class="g-col1_2">34</li>
+// </ul>
 
 
 .g-jcols {
@@ -200,36 +111,25 @@ ol.list{list-style-type:decimal;}
     display: inline-block; *zoom: 1; *display: inline;
     font-size: @font-size;
 }
+// <ul class="g-jcols">
+//     <li class="g-jcol">12</li>
+//     <li class="g-jcol">34</li>
+//     <li class="g-jcol">56</li>
+// </ul>
 
 
-/*
-
-<ul class="g-jcols">
-    <li class="g-jcol">12</li>
-    <li class="g-jcol">34</li>
-    <li class="g-jcol">56</li>
-</ul>
-
-*/
+.g-article {
+    p {
+        padding: 10px 0px 10px 0px;
+    }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ico {
+  display: inline-block; *zoom: 1; *display: inline;
+  position: relative;
+  background: url("/assets/images/sprite.png") no-repeat;
+}
 
 
 
@@ -238,11 +138,16 @@ ol.list{list-style-type:decimal;}
 // Custom Elements
 // =============================================
 
+
+
 .custom-button {
-
+    border:none;
+    outline:none;
 }
-.custom-text {
 
+.custom-text {
+    border:none;
+    outline:none;
 }
 
 .radio-label {
@@ -255,7 +160,7 @@ ol.list{list-style-type:decimal;}
    .wh(10px,10px); /**/
    position: absolute;
    left: 0; top: 3px;
-   background: url("/assets/images/sprite.png") no-repeat;
+   background: url("@{images}/sprite.png") no-repeat;
    .bp(0px,0px); /**/
   }
 
@@ -270,78 +175,8 @@ ol.list{list-style-type:decimal;}
 
 }
 
-.cover {
-  background-color: rgba(0,0,0,.5);
-  position: fixed;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-/*  display: none;
-  opacity: 0;*/
-}
-
-.dialog {
-
-}
 
 
-.swiper-container {
-  position:relative;
-  overflow:hidden;
-  -webkit-backface-visibility:hidden;
-  -moz-backface-visibility:hidden;
-  -ms-backface-visibility:hidden;
-  -o-backface-visibility:hidden;
-  backface-visibility:hidden;
-  /* Fix of Webkit flickering */
-  z-index:1;
-}
-.swiper-wrapper {
-  position:relative;
-  width:100%;
-  -webkit-transition-property:-webkit-transform, left, top;
-  -webkit-transition-duration:0s;
-  -webkit-transform:translate3d(0px,0,0);
-  -webkit-transition-timing-function:ease;
-
-  -moz-transition-property:-moz-transform, left, top;
-  -moz-transition-duration:0s;
-  -moz-transform:translate3d(0px,0,0);
-  -moz-transition-timing-function:ease;
-
-  -o-transition-property:-o-transform, left, top;
-  -o-transition-duration:0s;
-  -o-transform:translate3d(0px,0,0);
-  -o-transition-timing-function:ease;
-  -o-transform:translate(0px,0px);
-
-  -ms-transition-property:-ms-transform, left, top;
-  -ms-transition-duration:0s;
-  -ms-transform:translate3d(0px,0,0);
-  -ms-transition-timing-function:ease;
-
-  transition-property:transform, left, top;
-  transition-duration:0s;
-  transform:translate3d(0px,0,0);
-  transition-timing-function:ease;
-}
-.swiper-free-mode > .swiper-wrapper {
-  -webkit-transition-timing-function: ease-out;
-  -moz-transition-timing-function: ease-out;
-  -ms-transition-timing-function: ease-out;
-  -o-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-  margin: 0 auto;
-}
-.swiper-slide {
-  float: left;
-}
-.swiper-wp8-horizontal {
-  -ms-touch-action: pan-y;
-}
-.swiper-wp8-vertical {
-  -ms-touch-action: pan-x;
-}
 
 
 // =============================================
@@ -361,9 +196,6 @@ ol.list{list-style-type:decimal;}
 
 }
 
-
-
-
 // =============================================
 // Header
 // =============================================
@@ -381,14 +213,6 @@ ol.list{list-style-type:decimal;}
 
 }
 
-
-// =============================================
-// Main Page
-// =============================================
-
-.main {
-
-}
 
 
 

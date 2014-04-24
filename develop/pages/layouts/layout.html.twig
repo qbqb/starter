@@ -11,31 +11,38 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        {% set images = '/assets/images/' %}
+        {% set images = '/assets/images' %}
     </head>
     <body>
         <div class="layout">
-            <header id="header" class="header"></header>
+            <header id="header" class="header">
+
+
+
+
+
+
+            </header>
             <section id="content" class="content">
-                {% block content %}
-
-
-
-
-                    {# Your content #}
-
-
-
-
-                {% endblock %}
+                <!-- START CONTENT-->
+                    {% block content %}
+                        {# Your content #}
+                    {% endblock %}
+                <!-- END CONTENT-->
             </section>
-            <footer id="footer" class="footer"></footer>
+            <footer id="footer" class="footer">
+
+
+
+
+
+
+            </footer>
         </div>
         <script src="/assets/js/jquery-1.10.2.min.js"></script>
         <script src="/assets/js/jquery.easing.1.3.js"></script>
         <script src="/assets/js/jquery.placeholder.1.3.min.js"></script>
         <script src="/assets/js/utils.js"></script>
         <script src="/assets/js/init.js"></script>
-        {% block scripts %}{% endblock %}
     </body>
 </html>
