@@ -302,14 +302,15 @@
 .wh(@w:100%,@h:100%){width:@w; height:@h;}
 .bp(@l:0,@t:0){background-position: -@l  -@t ;}
 
-.pic(@path:"@{root}@{spritePath}") {
+.pic(@path:"@{images}/sprite.png") {
   display: block;
   position: absolute;
   background-image: url(@path);
   background-repeat:no-repeat;
 }
 
-.picr(@path:"@{root}@{spritePath}") {
+
+.picr(@path:"@{images}/sprite.png") {
   display: block;
   position: relative;
   background-image: url(@path);
