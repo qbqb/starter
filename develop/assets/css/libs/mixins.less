@@ -323,3 +323,39 @@
 //   box-sizing: border-box;
 //   *behavior: url(/assets/js/boxsizing.htc);
 // }
+
+
+.colgroup {
+    .clearfix();
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.col {
+    float: left;
+    display: block;
+    position: relative;
+}
+
+.colgroup-j {
+   width: 100%;
+   text-align: justify;
+   font-size: 0;
+   font-size: 12px\9;
+   &:after {
+        content: ""; width: 100%; display: inline-block; zoom: 1; *display: inline;
+   }
+}
+
+.col-j {
+    position: relative;
+    display: inline-block; *zoom: 1; *display: inline;
+    font-size: @font-size;
+    vertical-align: top;
+    text-align: left;
+}
+
+.none{display:none;}
+ul.list{list-style-type:disc;}
+ol.list{list-style-type:decimal;}
+.fix {.clearfix()}

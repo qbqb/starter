@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import "libs/mixins.less";
 @import "libs/variables.less";
+@import "libs/mixins.less";
 @import "libs/normalize.less";
 
 html {
@@ -23,11 +23,6 @@ a {
     color: @link-hover-color;
     text-decoration: none;
   }
-
-}
-
-.img-responsive {
-  .img-responsive();
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -35,8 +30,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: @line-height-h;
   color: @color-h;
   font-weight: @font-weight-h;
-  margin: 0;
-  padding: 0;
 }
 h1 { font-size: @font-size-h1; }
 h2 { font-size: @font-size-h2; }
@@ -45,85 +38,23 @@ h4 { font-size: @font-size-h4; }
 h5 { font-size: @font-size-h5; }
 h6 { font-size: @font-size-h6; }
 
-p {
-   margin: 0;
-   padding: 0;
+// =============================================
+// Global components
+// =============================================
+
+.g-article p {
+    padding: 10px 0px 10px 0px;
 }
 
-input,
-button,
-select,
-textarea {
-  font-family: @font-family;
-  font-size: @font-size;
-  line-height: @line-height;
-}
-
-.none{display:none;}
-ul.list{list-style-type:disc;}
-ol.list{list-style-type:decimal;}
-.fix {.clearfix()}
-
-.g-cols {
-    .clearfix();
-    width: 100%;
-    position: relative;
-}
-.g-col {
-    display: block;
-    float: left;
-    min-height: 1px;
-    position: relative;
-}
-.g-col1_2 {
-    .g-col;
-    width: 50%;
-}
-.g-col1_3 {
-    .g-col;
-    width: 33.33%;
-}
-.g-col1_4 {
-    .g-col;
-    width: 25%;
-}
-.g-col1_5 {
-    .g-col;
-    width: 20%;
-}
-// <ul class="g-cols">
-//     <li class="g-col1_2">12</li>
-//     <li class="g-col1_2">34</li>
-// </ul>
 
 
-.g-jcols {
-   width: 100%;
-   text-align: justify;
-   font-size: 0; font-size: 12px\9;
-   &:after {
-        content: ""; width: 100%; display: inline-block; zoom: 1; *display: inline;
-   }
-}
-
-.g-jcol {
-    position: relative;
-    display: inline-block; *zoom: 1; *display: inline;
-    font-size: @font-size;
-}
-// <ul class="g-jcols">
-//     <li class="g-jcol">12</li>
-//     <li class="g-jcol">34</li>
-//     <li class="g-jcol">56</li>
-// </ul>
 
 
-.g-article {
-    p {
-        padding: 10px 0px 10px 0px;
-    }
-}
+// #global
 
+// =============================================
+// Icons
+// =============================================
 
 .ico {
   display: inline-block; *zoom: 1; *display: inline;
@@ -134,67 +65,60 @@ ol.list{list-style-type:decimal;}
 
 
 
+
+// #icons
+
 // =============================================
 // Custom Elements
 // =============================================
 
-
+.custom-text {
+    width: 100%;
+    border:none;
+    outline:none;
+    font-size: @font-size;
+    line-height: normal;
+}
+textarea.custom-text {
+    resize:none;
+}
 
 .custom-button {
     border:none;
     outline:none;
-}
+    font-size: @font-size;
+    display: inline-block; *zoom: 1; *display: inline;
+    text-decoration: none;
+    text-align: center;
+    .clearfix();
 
-.custom-text {
-    border:none;
-    outline:none;
-}
+    &:hover {
 
-.radio-label {
-  display: block;
-  position: relative;
-  padding-left: 20px;
-  cursor: pointer;
-
-  .radio-pic {
-   .wh(10px,10px); /**/
-   position: absolute;
-   left: 0; top: 3px;
-   background: url("@{images}/sprite.png") no-repeat;
-   .bp(0px,0px); /**/
-  }
-
-  input[type="radio"]:checked + .radio-pic   {
-   .bp(0px,0px); /**/
-  }
-
-  input[type="radio"] {
-    display: none;
-
-  }
-
+    }
 }
 
 
 
+
+
+
+// #custom
 
 
 // =============================================
 // Layout
 // =============================================
 
-.layout {
-
-}
 .wrap {
-
-}
-.space {
 
 }
 .content {
 
 }
+
+
+
+// #layout
 
 // =============================================
 // Header
@@ -205,15 +129,30 @@ ol.list{list-style-type:decimal;}
 }
 
 
+
+
+
+//#header
+
 // =============================================
 // Footer
 // =============================================
+
+@headerHeight:50px;
 
 .footer {
 
 }
 
 
+
+
+
+//#footer
+
+// =============================================
+// Page
+// =============================================
 
 
 
