@@ -1,5 +1,5 @@
 (function($){
-    $.fn.stretch = function ( options ) {
+    $.fn.stickTheFooter = function ( options ) {
         var o = $.extend({
             header   :  $('#header'),
             content  :  $('#content'),
@@ -146,4 +146,75 @@
 
     });
   };
+})(jQuery);
+
+
+
+(function($){
+
+    $.fn.createSlideToggle = function ( options ) {
+
+        var o = $.extend({
+            buttonOpen:'.toggle-button-open',
+            buttonClose:'.toggle-button-close',
+            buttonToggle:'.toggle-button',
+            toggleContent:'.toggle-item-content',
+            speed : 300,
+            ease  : 'easeInOutQuad'
+        }, options);
+
+        return this.each(function(){
+
+            var $el = $(this),
+                $buttonOpen = $el.find(o.buttonOpen),
+                $buttonClose = $el.find(o.buttonClose),
+                $buttonToggle = $el.find(o.buttonToggle),
+                $content = $el.find(o.toggleContent);
+
+                $buttonOpen.click(function(e){
+                    if( !$el.hasClass('active') ) {
+                        openContent();
+                    }
+                    e.preventDefault();
+                });
+
+                $buttonClose.click(function(e){
+                    if( $el.hasClass('active') ) {
+                        closeContent();
+                    }
+                    e.preventDefault();
+                });
+
+                $buttonToggle.click(function(e){
+                    if( $el.hasClass('active') ){
+                        closeContent();
+                    } else {
+                        openContent();
+                    }
+
+                    if( $(this).data('toggle-title-open') != '' &&  $(this).data('toggle-title-close') != '') {
+                        if( $el.hasClass('active') ){
+                            $(this).html( $(this).data('toggle-title-close') );
+                        } else {
+                            $(this).html( $(this).data('toggle-title-open') );
+                        }
+                    }
+                    e.preventDefault();
+                });
+
+                // Functions
+                function openContent(){
+                    $el.addClass('active');
+                    $content.stop(true,true).slideDown(o.speed, o.ease);
+                }
+                function closeContent(){
+                    $el.removeClass('active');
+                    $content.stop(true,true).slideUp(o.speed, o.ease);
+                }
+
+
+        });
+
+    }
+
 })(jQuery);
