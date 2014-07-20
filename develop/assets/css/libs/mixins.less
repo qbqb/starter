@@ -362,3 +362,20 @@
   position: relative;
   background: url("/assets/images/sprite.png") no-repeat;
 }
+
+background: url("@{font}/sprite.png") 0px 0px no-repeat;
+
+.fontface(@font:"font"){
+
+    @font-face {
+        font-family: '@{font}';
+        src:url('/assets/css/libs/fonts/@{font}.eot?lawriy');
+        src:url('/assets/css/libs/fonts/@{font}.eot?#iefixlawriy') format('embedded-opentype'),
+            url('/assets/css/libs/fonts/@{font}.woff?lawriy') format('woff'),
+            url('/assets/css/libs/fonts/@{font}.ttf?lawriy') format('truetype'),
+            url('/assets/css/libs/fonts/@{font}.svg?lawriy#@{font}') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+}
