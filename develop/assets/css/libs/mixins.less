@@ -357,13 +357,17 @@
 .none{display:none;}
 .fix {.clearfix()}
 
-.ico {
-  display: inline-block; *zoom: 1; *display: inline;
-  position: relative;
-  background: url("/assets/images/sprite.png") no-repeat;
-}
+// .ico {
+//   display: inline-block; *zoom: 1; *display: inline;
+//   position: relative;
+//   background: url("/assets/images/sprite.png") no-repeat;
+// }
 
-background: url("@{font}/sprite.png") 0px 0px no-repeat;
+[class^="ico-"], [class*=" ico-"] {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
 
 .fontface(@font:"font"){
 
