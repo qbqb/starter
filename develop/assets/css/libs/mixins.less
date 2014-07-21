@@ -369,17 +369,19 @@
     vertical-align: middle;
 }
 
-.fontface(@font:"font"){
+.fontface(@fontName:"font";@font:"font"; @svgId:"font"; @fontWeight:normal; @fontStyle:normal;){
 
     @font-face {
-        font-family: '@{font}';
-        src:url('/assets/css/libs/fonts/@{font}.eot?lawriy');
-        src:url('/assets/css/libs/fonts/@{font}.eot?#iefixlawriy') format('embedded-opentype'),
-            url('/assets/css/libs/fonts/@{font}.woff?lawriy') format('woff'),
-            url('/assets/css/libs/fonts/@{font}.ttf?lawriy') format('truetype'),
-            url('/assets/css/libs/fonts/@{font}.svg?lawriy#@{font}') format('svg');
-        font-weight: normal;
-        font-style: normal;
+        font-family: '@{fontName}';
+        src:url('/assets/css/libs/fonts/@{font}.eot');
+        src:url('/assets/css/libs/fonts/@{font}.eot?#iefix') format('embedded-opentype'),
+            url('/assets/css/libs/fonts/@{font}.woff') format('woff'),
+            url('/assets/css/libs/fonts/@{font}.ttf') format('truetype'),
+            url('/assets/css/libs/fonts/@{font}.svg#@{svgId}') format('svg');
+        font-weight: @fontWeight;
+        font-style: @fontStyle;
     }
 
 }
+
+// .fontface("Proximanova", "proximanova-light-webfont", "proxima_nova_ltlight", bold, italic);
