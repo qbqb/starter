@@ -384,4 +384,11 @@
 
 }
 
-// .fontface("Proximanova", "proximanova-light-webfont", "proxima_nova_ltlight", bold, italic);
+
+.fontSize(@currentFontSize:@fs; @factor:1){
+    font-size: @currentFontSize+px;
+    font-size: @factor*(@currentFontSize/@fs)+em;
+}
+
+
+
