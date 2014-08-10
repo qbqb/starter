@@ -27,7 +27,7 @@ $templates = array(
     ),
     'php' => array(
         $template . '.php',
-    )    
+    )
 );
 
 $template = str_replace('/', '_', $template);
@@ -37,10 +37,22 @@ $templates['php'][] = $template . '.php';
 
 $templates_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $views_path . '/';
 
+$pjax = false;
+if(isset($_SERVER['HTTP_X_PJAX']) && strtolower($_SERVER['HTTP_X_PJAX']) == 'true'){
+    $pjax = true;
+    // echo var_export($pjax, true);
+    // exit;
+}
+
 foreach ($templates as $type => $type_templates) {
     foreach ($type_templates as $template){
         if($type == 'twig' && file_exists($templates_path . $template)){
-            $twig->display('/' . $template );
+
+            $twig->display('/' . $template,
+                    array( 'pjax' => $pjax) //true) //
+                );
+
+
             exit;
         }else if($type == 'php' && file_exists($templates_path . $template)){
             include $templates_path . $template;
