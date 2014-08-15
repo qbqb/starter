@@ -242,13 +242,11 @@ table {
 }
 
 ol,ul{
-    list-style:none;
     margin: 0;
     padding: 0;
+    list-style-position: inside;
 }
-nav ul{
-    list-style:none;
-}
+
 dl, dt, dd {
     padding: 0;
     margin: 0;
@@ -276,4 +274,14 @@ textarea {
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
+}
+
+
+
+
+[class^="ico-"], [class*=" ico-"] {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    background-image: url("@{images}/ico.png") !important;
 }

@@ -9,6 +9,10 @@
   }
 }
 
+.unlist {
+    list-style:none;
+}
+
 // Center-align a block level element
 .center-block() {
   display: block;
@@ -325,10 +329,12 @@
 
 
 .colgroup {
+    .unlist;
     .clearfix();
     position: relative;
     display: block;
     width: 100%;
+
 }
 .col {
     float: left;
@@ -337,6 +343,7 @@
 }
 
 .colgroup-j {
+   .unlist;
    width: 100%;
    text-align: justify;
    font-size: 0;
@@ -363,11 +370,6 @@
 //   background: url("/assets/images/sprite.png") no-repeat;
 // }
 
-[class^="ico-"], [class*=" ico-"] {
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-}
 
 .fontface(@fontName:"font";@font:"font"; @svgId:"font"; @fontWeight:normal; @fontStyle:normal;){
 
