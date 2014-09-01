@@ -311,9 +311,9 @@ $(document).ready(function() {
         color : '#8f8f8f'
     });
 
-    $('.dropdown').dropdown();
+    //$('.dropdown').dropdown();
 
-    $('.fancybox').fancybox();
+    //$('.fancybox').fancybox();
 
 
 
