@@ -1,11 +1,59 @@
+.m-fill {
+    width: 100%;
+    height: 100%;
+}
+.m-table {
+    display: table;
+    position: relative;
+}
+.m-cell {
+    display: table-cell;
+    position: relative;
+}
 
-.gl-article {
-    p {
-        padding: 10px 0px 10px 0px;
+.m-vat {vertical-align: top; }
+.m-vam {vertical-align: middle; }
+.m-vab {vertical-align: bottom; }
+
+.m-tal {text-align: left; }
+.m-tac {text-align: center; }
+.m-tar {text-align: right; }
+
+.m-padding {padding: 10px; }
+
+.m-bgc-red {background-color: #FF5151; }
+.m-bgc-blue {background-color: #7078E0; }
+.m-bgc-green {background-color: #80DE72; }
+.m-bgc-yellow {background-color: #FFFF80; }
+.m-bgc-black {background-color: #000; }
+.m-bgc-white {background-color: #FFF; }
+
+.m-c-black {color: #000;}
+.m-c-white {color: #fff;}
+
+.m-table-v {
+    .m-table;
+    .m-fill;
+    .m-tac;
+    .m-cell {
+        .m-fill;
+        .m-vam;
     }
 }
 
-.gl-pager .hidden {
-    display:none;
+.m-float-l {float: left; }
+.m-float-r {float: right; }
+
+.m-small {
+    font-size: @font-size-small;
 }
+.m-lead {
+    font-size: @font-size-lead;
+}
+.m-large {
+    font-size: @font-size-large;
+}
+
+
+
 

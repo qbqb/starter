@@ -1,10 +1,23 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+}
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 html {
-   min-width: 960px;
+   min-width: 940px;
 }
 
 body {
   font-family: @font-family;
-  font-size:@fs+px;
+  font-size:@font-size;
   line-height: @line-height;
   color: @text-color;
   background-color: @body-bg;
@@ -21,11 +34,15 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
   font-family: @font-family-h;
   line-height: @line-height-h;
   color: @color-h;
   font-weight: @font-weight-h;
+  text-transform: uppercase;
 }
+
 h1 { font-size: @font-size-h1; }
 h2 { font-size: @font-size-h2; }
 h3 { font-size: @font-size-h3; }
@@ -33,10 +50,21 @@ h4 { font-size: @font-size-h4; }
 h5 { font-size: @font-size-h5; }
 h6 { font-size: @font-size-h6; }
 
-.wrap {
-
+p {
+    padding-bottom: 10px;
 }
 
-.content {
+[class^="ico-"], [class*=" ico-"] {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    background-image: url("@{images}/ico.png") !important;
+}
 
+.wrap {
+    position: relative;
+    margin:auto;
+    width: 940px;
+    padding-left: 20px;
+    padding-right: 20px;
 }

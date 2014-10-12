@@ -1,4 +1,20 @@
-.custom-text {
+input,
+button,
+select,
+textarea {
+  font-family: @font-family;
+  font-size: @font-size;
+  line-height: @line-height;
+  .placeholder(@placeholderColor)
+}
+
+.placeholder {
+    color: @placeholderColor;
+}
+
+
+
+.itx {
     width: 100%;
     border:none;
     outline:none;
@@ -6,12 +22,12 @@
     line-height: normal;
     padding: 0px 5px 0px 5px;
 }
-textarea.custom-text {
+textarea.itx {
     .custom-text;
     resize:none;
 }
 
-.custom-button {
+.btn {
     border:none;
     outline:none;
     font-size: @font-size;
@@ -24,3 +40,5 @@ textarea.custom-text {
 
     }
 }
+
+
