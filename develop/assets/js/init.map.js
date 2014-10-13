@@ -24,7 +24,7 @@ $(document).ready(function(){
        var mapOptions = {
          zoom: 4, //Зум
          scrollwheel: false,
-         //draggable: IS_MOBILE.any() ? false : true,
+         draggable: IS_MOBILE.any() ? false : true,
          center: new google.maps.LatLng(53.467761,33.3634605), //Координаты
          mapTypeControlOptions: { //Назначаем ID стилей
            mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
