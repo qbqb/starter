@@ -190,7 +190,7 @@
            buttonClose:'.toggle-button-close',
            buttonToggle:'.toggle-button',
            buttonTitle:'.toggle-button-title',
-           toggleContent:'.toggle-box-content',
+           toggleContent:'.toggle-content',
            speed : 400,
            ease  : 'easeInOutQuad',
            beforeOpen:function(){},
@@ -274,49 +274,3 @@
 })(jQuery, window);
 
 
-
-/*
-*
-*
-*
-* Helpers
-*
-*
-*
-*/
-
-
-
-
-
-
-
-
-/*
-*
-*
-*
-* Initialization
-*
-*
-*
-*/
-
-$(document).ready(function() {
-
-
-    $('body').stickTheFooter({offset:-20});
-
-    $('input, textarea').placeholder({
-        color : '#8f8f8f'
-    });
-
-    //$('.dropdown').dropdown();
-
-    //$('.fancybox').fancybox();
-
-
-
-
-
-});

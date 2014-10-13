@@ -9,10 +9,6 @@
   }
 }
 
-.unlist {
-    list-style:none;
-}
-
 // Center-align a block level element
 .center-block() {
   display: block;
@@ -320,48 +316,6 @@
   background-repeat:no-repeat;
 }
 
-
-
-.colgroup {
-    .unlist;
-    .clearfix();
-    position: relative;
-    display: block;
-    width: 100%;
-
-}
-.col {
-    float: left;
-    display: block;
-    position: relative;
-}
-
-.colgroup-j {
-   .unlist;
-   width: 100%;
-   text-align: justify;
-   font-size: 0;
-   font-size: 12px\9;
-   &:after {
-        content: ""; width: 100%; display: inline-block; zoom: 1; *display: inline;
-   }
-}
-
-.col-j {
-    position: relative;
-    display: inline-block; *zoom: 1; *display: inline;
-    font-size: @font-size;
-    vertical-align: top;
-    text-align: left;
-}
-
-.none{display:none;}
-.fix {.clearfix()}
-.clearfix {.clearfix()}
-
-
-
-
 .fontface(@fontName:"font";@font:"font"; @svgId:"font"; @fontWeight:normal; @fontStyle:normal;){
 
     @font-face {
@@ -378,8 +332,4 @@
 }
 
 
-.fontSize(@currentFontSize:@fs; @factor:1){
-    // font-size: @currentFontSize+px;
-    font-size: @factor*(@currentFontSize/@fs)+em;
-}
 

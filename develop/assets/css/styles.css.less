@@ -1,15 +1,26 @@
 @charset "utf-8";
-@import "libs/variables.less";
-@import "libs/mixins.less";
 @import "libs/normalize.less";
+@import "libs/mixins.less";
 @import "libs/fonts.less";
 @import "libs/main.less";
-@import "libs/global.less";
-@import "libs/custom.less";
-@import "libs/font-icons.less";
-@import "libs/compass/stylesheets/less/icons.less";
 @import "libs/plugins.less";
+@import "libs/controls.less";
+@import "libs/compass/stylesheets/less/icons.less";
 
+
+// =============================================
+// Layout
+// =============================================
+
+html {min-width: 940px; }
+
+.wrap {
+    position: relative;
+    margin:auto;
+    width: 940px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 // =============================================
 // Header
@@ -31,11 +42,7 @@
 // Content
 // =============================================
 
-.c-pager .hidden {display:none; }
-
-
-
-
+.c-pager .hidden {display:none;}
 
 // =============================================
 // Main Page
