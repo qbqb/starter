@@ -28,10 +28,10 @@ if( !IS_MOBILE ) {
 /*
 How to use
 
-if( isMobile.any() ) alert('Mobile');
+if( IS_MOBILE.any() ) alert('Mobile');
 To check to see if the user is on a specific mobile device:
 
-if( isMobile.iOS() ) alert('iOS');
+if( IS_MOBILE.iOS() ) alert('iOS');
 */
 
 // var supportsTouch = ('ontouchstart' in document.documentElement);

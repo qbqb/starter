@@ -173,6 +173,8 @@
             e.stopPropagation();
         });
 
+        return this;
+
     }
 
 
@@ -263,14 +265,117 @@
 
         });
 
+        return this;
+
     }
 
 
 
+    /*!
+    * jQuery createMap plugin
+    *
+    * Copyright (c) 2014
+    *
+    * @version 1.0.0
+    */
+    jQuery.fn.createMap = function ( options ) {
+
+        var defaults = {
+            zoom:10,
+            scrollwheel: false,
+            draggable:true,
+            centerY:59.9174454,
+            centerX:30.3250575,
+
+            places: [
+                ['St. Petersburg', 59.9174454,30.3250575]
+            ],
+
+            styles: null,
+            stylesName:"Styled Map",
+
+            markerImgUrl:null,
+            markerWidth:null, //ширина
+            markerHeight:null, //высота
+            markerOffsetX:null, //расстояние слева до главной точки
+            markerOffsetY:null, //расстояние сверху до главной точки
+
+            animation: null,
+
+            popupMode:true,
+
+            actions:function(){}
+        }
+
+        var o = $.extend(defaults, options),
+            id = $(this).selector.substr(1, $(this).selector.length),
+            styles = o.styles,
+            map, cm_mapMarkers = [];
+
+        var mapOptions = {
+            zoom: o.zoom,
+            scrollwheel: o.scrollwheel,
+            draggable: o.draggable,
+            center: new google.maps.LatLng(o.centerY,o.centerX),
+            mapTypeControlOptions: {
+              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+            }
+        };
+
+        function setMarkers(map, locations) {
+            var latlngbounds = new google.maps.LatLngBounds();
+            var infowindow = new google.maps.InfoWindow();
+            if ( o.markerImgUrl ) {
+                var image = new google.maps.MarkerImage(o.markerImgUrl,
+                    new google.maps.Size(o.markerWidth, o.markerHeight),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(o.markerOffsetX, o.markerOffsetY)
+                );
+            }
+            for (var i = 0; i < o.places.length; i++) {
+                var myLatLng = new google.maps.LatLng(locations[i][1], locations[i][2]);
+                latlngbounds.extend(myLatLng);
+                var marker = new google.maps.Marker({
+                   position: myLatLng,
+                   map: map,
+                   icon: o.markerImgUrl ? image : null,
+                   animation: o.animation,
+                   title: locations[i][0],
+                });
+                cm_mapMarkers.push(marker);
+                if( o.popupMode ){
+                    google.maps.event.addListener(marker, 'click', function() {
+                         infowindow.setContent("<div class='c-map-popup'>"+this.title+"</div>");
+                         infowindow.open(map,this);
+                    });
+                }
+            }
+        };
+
+        return this.each(function(){
+            map = new google.maps.Map(document.getElementById(id),
+              mapOptions); //Создаем карту
+
+            setMarkers(map, o.places); //Устанавливаем маркеры
+
+            if( styles ){ //Добавляем стили
+                var styledMap = new google.maps.StyledMapType(styles,
+                  {name: o.stylesName});
+                map.mapTypes.set('map_style', styledMap);
+                map.setMapTypeId('map_style');
+            }
+
+            o.actions(map, cm_mapMarkers);
+
+        });
+
+
+    /*____End____*/ }
 
 
 
 
-})(jQuery, window);
+
+/*______________End_______________*/ })(jQuery, window);
 
 
