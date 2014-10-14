@@ -34,7 +34,6 @@ $(document).ready(function() {
         $(this).closest('.c-input-outer').removeClass('c-input-error');
     });
 
-
     $('#map_canvas').createMap({
         centerY:59.937266,
         centerX:30.322400,
@@ -79,6 +78,51 @@ $(document).ready(function() {
 
     });
 
+    $('.datepicker').datetimepicker({
+        lang:'ru',
+        timepicker:false,
+        format:'d.m.Y',
+        dayOfWeekStart:1,
+        closeOnDateSelect:true,
+        scrollInput: false,
+        scrollMonth: false,
+        onChangeMonth: function(current_time, $input){
+            $input.val( current_time.dateFormat('d.m.Y') );
+        }
+    });
+
+    $(".c-range").ionRangeSlider();
+
+    (function(){
+
+        $('.c-range-double').ionRangeSlider({
+            type:'double',
+            min:1000,
+            max:50000,
+            from:10000,
+            to:40000,
+            step: 1000,
+            prefix: "",
+            prettify: true,
+            onLoad:   function (obj) { setVal(obj); },
+            onChange: function (obj) { setVal(obj); }
+        });
+
+        function setVal(obj){
+            var $outer = obj.input.closest('.c-range-outer-simple'),
+                $outputMin = $outer.find('.c-range-output-min'),
+                $outputMax = $outer.find('.c-range-output-max');
+            $outputMin.val(obj.fromNumber);
+            $outputMax.val(obj.toNumber);
+        }
+
+    })();
+
+    $('.active-toggle').click(function(){
+        $(this).toggleClass('active');
+    });
 
 
-});
+
+
+/*_____________End_______________*/ });
