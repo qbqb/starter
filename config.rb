@@ -1,7 +1,7 @@
 # require 'autoprefixer-rails'
 
 http_path = "/"
-css_dir = "develop/assets/css/libs/compass/stylesheets/i.css.less"
+css_dir = "develop/assets/css/libs/compass/stylesheets"
 sass_dir = "develop/assets/css/libs/compass/sass"
 images_dir = "develop/assets/images"
 # javascripts_dir = "js"

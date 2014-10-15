@@ -43,12 +43,13 @@
             itemTitle: '.dropdown-menu-title',
             inputHidden: '.dropdown-hidden',
             active:'active',
-            dataAttr:'value'
+            dataAttr:'value',
         }
 
         var o = $.extend(defaults, options);
 
-        var $el = $(this);
+        var $el = $(this), hiddenArr = [];
+
 
         $(document.body).on('click', $el.selector+" "+o.button, function(e){
 
@@ -81,14 +82,36 @@
             var $menu  = $dropdown.find(o.menu);
             var $buttonTitle = $dropdown.find(o.buttonTitle);
             var $inputHidden = $dropdown.find(o.inputHidden);
+            var $checkbox;
 
-            $menu.hide();
-            $buttonTitle.html( $(this).find(o.itemTitle).html() );
-            $inputHidden.val( $(this).data(o.dataAttr) );
-            $dropdown.removeClass(o.active);
-            $dropdown.addClass('dropdown-changed');
+            if( $dropdown.hasClass('dropdown-multi') ) {
+                $(o.menu).hide();
+                $menu.show();
+                $dropdown.addClass('dropdown-changed');
+                $checkbox = $(this).find("input[type='checkbox']");
+                if( $checkbox.prop("checked") == false ){
+                    $checkbox.prop("checked", true);
+                    hiddenArr.push( $(this).data(o.dataAttr) );
+                } else {
+                    $checkbox.prop("checked", false);
+                    hiddenArr.splice( hiddenArr.indexOf( $(this).data(o.dataAttr) ), 1 );
+                }
+                $inputHidden.val( hiddenArr );
+                e.preventDefault();
+            } else if ( $dropdown.hasClass('dropdown-lang') ) {
+                $menu.hide();
+                $dropdown.removeClass(o.active);
+                $dropdown.addClass('dropdown-changed');
+            } else {
+                $menu.hide();
+                $buttonTitle.html( $(this).find(o.itemTitle).html() );
+                $inputHidden.val( $(this).data(o.dataAttr) );
+                $dropdown.removeClass(o.active);
+                $dropdown.addClass('dropdown-changed');
+                e.preventDefault();
+            }
 
-            e.preventDefault();
+
         });
 
         function hideDropdown(e){
@@ -310,7 +333,7 @@
         var o = $.extend(defaults, options),
             id = $(this).selector.substr(1, $(this).selector.length),
             styles = o.styles,
-            map, cm_mapMarkers = [];
+            map, cm_mapMarkers = [],infowindow, addMarkers;
 
         var mapOptions = {
             zoom: o.zoom,
@@ -322,17 +345,18 @@
             }
         };
 
+
         function setMarkers(map, locations) {
             var latlngbounds = new google.maps.LatLngBounds();
-            var infowindow = new google.maps.InfoWindow();
+            infowindow = new google.maps.InfoWindow();
             if ( o.markerImgUrl ) {
                 var image = new google.maps.MarkerImage(o.markerImgUrl,
                     new google.maps.Size(o.markerWidth, o.markerHeight),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(o.markerOffsetX, o.markerOffsetY)
+                    new google.maps.Point(0, 0)
+                    //new google.maps.Point(o.markerOffsetX, o.markerOffsetY)
                 );
             }
-            for (var i = 0; i < o.places.length; i++) {
+            for (var i = 0; i < locations.length; i++) {
                 var myLatLng = new google.maps.LatLng(locations[i][1], locations[i][2]);
                 latlngbounds.extend(myLatLng);
                 var marker = new google.maps.Marker({
@@ -352,6 +376,8 @@
             }
         };
 
+        addMarkers = setMarkers;
+
         return this.each(function(){
             map = new google.maps.Map(document.getElementById(id),
               mapOptions); //Создаем карту
@@ -365,7 +391,7 @@
                 map.setMapTypeId('map_style');
             }
 
-            o.actions(map, cm_mapMarkers);
+            o.actions(map, cm_mapMarkers, infowindow, addMarkers);
 
         });
 

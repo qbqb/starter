@@ -43,8 +43,8 @@ $(document).ready(function() {
             ['Our Office', 59.937266,30.322400]
         ],
 
-        markerImgUrl:'/assets/images/map-marker.png',
-        markerWidth:40,
+        markerImgUrl:'/assets/images/map-marker-sprite.png',
+        markerWidth:27,
         markerHeight:40,
         markerOffsetX:14,
         markerOffsetY:40,
@@ -63,16 +63,58 @@ $(document).ready(function() {
 
         draggable: IS_MOBILE.any() ? false : true,
 
-        actions: function(map, markers){
+        actions: function(map, markers, infowindow, addMarkers){
+
+            //путь к спрайту, размеры одного маркера в спрайте, background-position, смещение маркера (left, top)
+            var icon1 = new google.maps.MarkerImage("/assets/images/map-marker-sprite.png", new google.maps.Size(27, 40), new google.maps.Point(0, 0), new google.maps.Point(14, 40));
+            var icon2 = new google.maps.MarkerImage("/assets/images/map-marker-sprite.png", new google.maps.Size(27, 40), new google.maps.Point(28, 0), new google.maps.Point(14, 40));
+
 
             var y = markers[0].getPosition().lat()
             var x = markers[0].getPosition().lng()
+
+            var newPlaces = [
+                ['1', 60.937266,30.322400],
+                ['2', 61.937266,30.322400],
+                ['3', 62.937266,30.322400]
+            ];
+
+            google.maps.event.addListener(markers[0], 'mouseover', function() {
+                if (infowindow.content) return;
+                markers[0].setIcon(icon2);
+            });
+            google.maps.event.addListener(markers[0], 'mouseout', function() {
+                if (infowindow.content) return;
+                markers[0].setIcon(icon1);
+            });
+            google.maps.event.addListener(markers[0], 'click', function() {
+                 markers[0].setIcon(icon2);
+                 map.panTo(new google.maps.LatLng(y,x));
+            });
+
+            google.maps.event.addListener(map, 'click', function(){
+                infowindow.close();
+                infowindow.content = undefined;
+                markers[0].setIcon(icon1);
+            });
+
+            google.maps.event.addListener(infowindow, 'closeclick', function() {
+                infowindow.content = undefined;
+                markers[0].setIcon(icon1);
+            });
 
             $('.map-btn').click(function(event) {
                  map.panTo(new google.maps.LatLng(y,x));
                  map.setZoom(17);
                  return false;
             });
+
+            $('.map-btn-2').click(function(event) {
+                addMarkers(map, newPlaces);
+                map.setZoom(5);
+                return false;
+            });
+
 
         }
 
