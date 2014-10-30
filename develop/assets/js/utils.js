@@ -9,21 +9,22 @@
     */
     jQuery.fn.stickTheFooter = function ( options ) {
         var o = $.extend({
-            header   :  $('.pageheader'),
+            header   :  $('#header'),
             content  :  $('#content'),
-            footer   :  $('.footer-outer'),
+            footer   :  $('#footer'),
             offset   :  0
         }, options);
         return this.each(function(event){
-            var headerHeight   =  o.header.eq(0).height(),
-                footerHeight   =  o.footer.eq(0).height();
+            var headerHeight   =  o.header.eq(0).outerHeight(),
+                footerHeight   =  o.footer.eq(0).outerHeight();
             function init(){
-               o.content.css('minHeight', $(window).height() - footerHeight - headerHeight + o.offset);
+               o.content.css('minHeight', $(window).outerHeight() - footerHeight - headerHeight + o.offset);
             }
             init();
             $(window).resize(init);
         });
     }
+    /* . */
 
 
     /*!
@@ -48,8 +49,7 @@
 
         var o = $.extend(defaults, options);
 
-        var $el = $(this), hiddenArr = [];
-
+        var $el = $(this);
 
         $(document.body).on('click', $el.selector+" "+o.button, function(e){
 
@@ -85,6 +85,13 @@
             var $checkbox;
 
             if( $dropdown.hasClass('dropdown-multi') ) {
+
+                if ( $inputHidden.val() == "" ){
+                    var hiddenArr = [];
+                } else {
+                    var hiddenArr = $inputHidden.val().split(',');
+                }
+
                 $(o.menu).hide();
                 $menu.show();
                 $dropdown.addClass('dropdown-changed');
@@ -110,9 +117,9 @@
                 $dropdown.addClass('dropdown-changed');
                 e.preventDefault();
             }
-
-
         });
+
+
 
         function hideDropdown(e){
             if( $(e.target).is( $el.selector ) || $(e.target).is($el.selector + ' *')) return;
@@ -136,6 +143,7 @@
         });
 
     }
+    /* . */
 
 
 
@@ -333,7 +341,7 @@
         var o = $.extend(defaults, options),
             id = $(this).selector.substr(1, $(this).selector.length),
             styles = o.styles,
-            map, cm_mapMarkers = [],infowindow, addMarkers;
+            map, cm_mapMarkers = [], addMarkers;
 
         var mapOptions = {
             zoom: o.zoom,
@@ -346,9 +354,8 @@
         };
 
 
-        function setMarkers(map, locations) {
+        function setMarkers(map, locations, markersArr) {
             var latlngbounds = new google.maps.LatLngBounds();
-            infowindow = new google.maps.InfoWindow();
             if ( o.markerImgUrl ) {
                 var image = new google.maps.MarkerImage(o.markerImgUrl,
                     new google.maps.Size(o.markerWidth, o.markerHeight),
@@ -365,15 +372,14 @@
                    icon: o.markerImgUrl ? image : null,
                    animation: o.animation,
                    title: locations[i][0],
+                   contentPic:locations[i][3],
+                   contentPrice:locations[i][4],
+                   contentAddress:locations[i][5]
                 });
-                cm_mapMarkers.push(marker);
-                if( o.popupMode ){
-                    google.maps.event.addListener(marker, 'click', function() {
-                         infowindow.setContent("<div class='c-map-popup'>"+this.title+"</div>");
-                         infowindow.open(map,this);
-                    });
-                }
+                markersArr.push(marker);
+
             }
+
         };
 
         addMarkers = setMarkers;
@@ -382,7 +388,7 @@
             map = new google.maps.Map(document.getElementById(id),
               mapOptions); //Создаем карту
 
-            setMarkers(map, o.places); //Устанавливаем маркеры
+            setMarkers(map, o.places, cm_mapMarkers); //Устанавливаем маркеры
 
             if( styles ){ //Добавляем стили
                 var styledMap = new google.maps.StyledMapType(styles,
@@ -391,17 +397,19 @@
                 map.setMapTypeId('map_style');
             }
 
-            o.actions(map, cm_mapMarkers, infowindow, addMarkers);
+            o.actions(map, cm_mapMarkers, addMarkers);
 
         });
 
 
-    /*____End____*/ }
+    }
+    /* . */
 
 
 
 
 
-/*______________End_______________*/ })(jQuery, window);
+
+})(jQuery, window); /*______________End_______________*/
 
 

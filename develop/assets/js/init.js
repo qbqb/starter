@@ -17,6 +17,11 @@ $(document).ready(function() {
 
     $('.fancybox').fancybox();
 
+    $('.fancybox-modal').fancybox({
+        // modal:true,
+        closeBtn:false
+    });
+
     $('.c-slider-on').bxSlider();
 
     $('.c-slider-fade-on').bxSlider({
@@ -38,86 +43,18 @@ $(document).ready(function() {
         centerY:59.937266,
         centerX:30.322400,
         zoom:17,
-
-        places: [
-            ['Our Office', 59.937266,30.322400]
-        ],
-
+        places: HELPERS.googleMaps.places,
         markerImgUrl:'/assets/images/map-marker-sprite.png',
         markerWidth:27,
         markerHeight:40,
         markerOffsetX:14,
         markerOffsetY:40,
         animation: google.maps.Animation.DROP,
-
-        styles:[
-            {
-              "featureType": "water",
-              "stylers": [
-                { "visibility": "on" },
-                { "saturation": 0 },
-                { "lightness": -13 }
-              ]
-            }
-        ],
-
+        styles: HELPERS.googleMaps.styles,
         draggable: IS_MOBILE.any() ? false : true,
-
         actions: function(map, markers, infowindow, addMarkers){
-
-            //путь к спрайту, размеры одного маркера в спрайте, background-position, смещение маркера (left, top)
-            var icon1 = new google.maps.MarkerImage("/assets/images/map-marker-sprite.png", new google.maps.Size(27, 40), new google.maps.Point(0, 0), new google.maps.Point(14, 40));
-            var icon2 = new google.maps.MarkerImage("/assets/images/map-marker-sprite.png", new google.maps.Size(27, 40), new google.maps.Point(28, 0), new google.maps.Point(14, 40));
-
-
-            var y = markers[0].getPosition().lat()
-            var x = markers[0].getPosition().lng()
-
-            var newPlaces = [
-                ['1', 60.937266,30.322400],
-                ['2', 61.937266,30.322400],
-                ['3', 62.937266,30.322400]
-            ];
-
-            google.maps.event.addListener(markers[0], 'mouseover', function() {
-                if (infowindow.content) return;
-                markers[0].setIcon(icon2);
-            });
-            google.maps.event.addListener(markers[0], 'mouseout', function() {
-                if (infowindow.content) return;
-                markers[0].setIcon(icon1);
-            });
-            google.maps.event.addListener(markers[0], 'click', function() {
-                 markers[0].setIcon(icon2);
-                 map.panTo(new google.maps.LatLng(y,x));
-            });
-
-            google.maps.event.addListener(map, 'click', function(){
-                infowindow.close();
-                infowindow.content = undefined;
-                markers[0].setIcon(icon1);
-            });
-
-            google.maps.event.addListener(infowindow, 'closeclick', function() {
-                infowindow.content = undefined;
-                markers[0].setIcon(icon1);
-            });
-
-            $('.map-btn').click(function(event) {
-                 map.panTo(new google.maps.LatLng(y,x));
-                 map.setZoom(17);
-                 return false;
-            });
-
-            $('.map-btn-2').click(function(event) {
-                addMarkers(map, newPlaces);
-                map.setZoom(5);
-                return false;
-            });
-
-
+            HELPERS.googleMaps.actions(map, markers, addMarkers);
         }
-
     });
 
     $('.datepicker').datetimepicker({
@@ -135,36 +72,31 @@ $(document).ready(function() {
 
     $(".c-range").ionRangeSlider();
 
-    (function(){
-
-        $('.c-range-double').ionRangeSlider({
-            type:'double',
-            min:1000,
-            max:50000,
-            from:10000,
-            to:40000,
-            step: 1000,
-            prefix: "",
-            prettify: true,
-            onLoad:   function (obj) { setVal(obj); },
-            onChange: function (obj) { setVal(obj); }
-        });
-
-        function setVal(obj){
-            var $outer = obj.input.closest('.c-range-outer-simple'),
-                $outputMin = $outer.find('.c-range-output-min'),
-                $outputMax = $outer.find('.c-range-output-max');
-            $outputMin.val(obj.fromNumber);
-            $outputMax.val(obj.toNumber);
+    $('.c-range-double').ionRangeSlider({
+        type:'double',
+        min:1000,
+        max:50000,
+        from:10000,
+        to:40000,
+        step: 1000,
+        prefix: "",
+        prettify: true,
+        onLoad:   function (obj) {
+            HELPERS.rangeSlider.setVal(obj);
+        },
+        onChange: function (obj) {
+            HELPERS.rangeSlider.setVal(obj);
         }
-
-    })();
+    });
 
     $('.active-toggle').click(function(){
         $(this).toggleClass('active');
     });
 
+    HELPERS.browser.ie();
+    HELPERS.browser.mobile();
+    HELPERS.formControls();
+    HELPERS.local.init();
 
 
-
-/*_____________End_______________*/ });
+}); /*_____________End_______________*/
